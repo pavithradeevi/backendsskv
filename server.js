@@ -210,6 +210,49 @@ app.post('/api/job-applications', upload.single('resume'), (req, res) => {
       res.status(200).json({ success: true, message: 'Details saved successfully!' });
     });
   });
+
+  // Endpoint to fetch all service requests
+app.get('/api/service-requests', (req, res) => {
+  const sql = 'SELECT * FROM service_requests';
+  
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      console.error('Error retrieving data from service_requests:', err.message);
+      return res.status(500).json({ success: false, message: 'Failed to fetch service requests.' });
+    }
+
+    res.status(200).json({ success: true, data: rows });
+  });
+});
+
+// Endpoint to fetch all job applications
+app.get('/api/job-applications', (req, res) => {
+  const sql = 'SELECT * FROM job_applicationss';
+  
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      console.error('Error retrieving data from job_applicationss:', err.message);
+      return res.status(500).json({ success: false, message: 'Failed to fetch job applications.' });
+    }
+
+    res.status(200).json({ success: true, data: rows });
+  });
+});
+
+// Endpoint to fetch all chatbot details
+app.get('/api/chatbot-details', (req, res) => {
+  const sql = 'SELECT * FROM chatbot_details';
+  
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      console.error('Error retrieving data from chatbot_details:', err.message);
+      return res.status(500).json({ success: false, message: 'Failed to fetch chatbot details.' });
+    }
+
+    res.status(200).json({ success: true, data: rows });
+  });
+});
+
   
 
 app.listen(PORT, () => {
